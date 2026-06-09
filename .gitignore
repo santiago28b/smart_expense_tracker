@@ -1,0 +1,25 @@
+# Environment variables (secrets — never commit these)
+.env
+.env.*
+
+# Virtual environment
+venv/
+.venv/
+
+# Personal expense data
+extracted_data/
+*.zip
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# IDE / OS
+.DS_Store
+.vscode/
+.idea/
+*.swp
