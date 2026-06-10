@@ -7,7 +7,9 @@ import streamlit as st
 import os
 load_dotenv()
 
-
+# Streamlit Cloud: read from st.secrets if env var not set
+if not os.getenv("ANTHROPIC_API_KEY") and hasattr(st, "secrets"):
+    os.environ["ANTHROPIC_API_KEY"] = st.secrets.get("ANTHROPIC_API_KEY", "")
 # Load the CSV into a dataframe
 csv_file = "extracted_data/expense_data_1.csv"
 if os.path.exists(csv_file):
