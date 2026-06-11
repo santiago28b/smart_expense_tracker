@@ -15,32 +15,10 @@ os.makedirs("extracted_data", exist_ok=True)
 csv_file = "extracted_data/expense_data_1.csv"
 if os.path.exists(csv_file):
     data = pd.read_csv(csv_file)
-    data = data[["Date", "Category", "Note", "Amount", "Income/Expense"]]
+    data = data[["Date", "Category", "Note", "Amount"]]
 else:
     data = pd.DataFrame(columns=["Date", "Note", "Amount", "Category"])
 
-
-def add_expense(data, date, category, note, amount, exp_type):
-    new_entry = {
-        'Date': date,
-        'Category': category,
-        'Note': note,
-        'Amount': amount,
-        'Income/Expense': exp_type
-    }
-    data = pd.concat([data, pd.DataFrame([new_entry])], ignore_index=True)
-    # print(f'New entry added: {note} - {amount} on {date}')
-    return data
-
-
-def recent_expenses(n=5):
-    return data.tail(n)
-
-def summarize_expenses(by='Category'):
-    summary = data[data['Income/Expense'] == 'Expense'].groupby(by)['Amount'].sum()
-    return summary.sort_values(ascending=False)
-
-# print(summarize_expenses().dtype)
 client = anthropic.Anthropic()
 
 VALID_CATEGORIES = ["Food", "Transportation", "Entertainment", "Other"]
