@@ -11,6 +11,7 @@ load_dotenv()
 if not os.getenv("ANTHROPIC_API_KEY") and hasattr(st, "secrets"):
     os.environ["ANTHROPIC_API_KEY"] = st.secrets.get("ANTHROPIC_API_KEY", "")
 # Load the CSV into a dataframe
+os.makedirs("extracted_data", exist_ok=True)
 csv_file = "extracted_data/expense_data_1.csv"
 if os.path.exists(csv_file):
     data = pd.read_csv(csv_file)
